@@ -1,6 +1,6 @@
 [user]
-	name = Sukumar Yethadka
-	email = sukumar@thinkapi.com
+	name =
+	email =
 [alias]
 	co = checkout
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
@@ -17,8 +17,3 @@
 	whitespace = nowarn
 [format]
 	pretty = %C(yellow)%h%Creset %s %C(red)(%cr)%Creset
-[github]
-	user = sthadka
-	token =
-[push]
-	default = simple
