@@ -123,4 +123,4 @@ bind Down last-window \; swap-pane -s tmp.1 \; kill-window -t tmp
 bind P pipe-pane -o "cat >>~/#W.log" \; display "Toggled logging to ~/#W.log"
 
 # load theme
-source-file "${HOME}/.dotfiles/tmux/tmux/themes/wemux"
+source-file "${HOME}/.tmux/themes/wemux"

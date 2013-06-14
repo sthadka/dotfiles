@@ -1,5 +1,5 @@
-[submodule "tmux/tmux"]
-    path = tmux/tmux
+[submodule "tmux/tmux.symlink"]
+    path = tmux/tmux.symlink
     url = git://github.com/zaiste/tmuxified.git
     ignore = dirty
 
