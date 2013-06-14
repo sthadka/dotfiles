@@ -64,7 +64,7 @@ fi
 
 # Execute all the init.sh scripts in dotfiles
 for module in `cat ~/.modules`; do
-    module_init_path=$HOME/dotfiles/$module/init.sh
+    module_init_path=$HOME/.dotfiles/$module/init.sh
     if [[ -e $module_init_path ]]; then
     . $module_init_path
     fi
