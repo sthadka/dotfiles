@@ -20,6 +20,8 @@ fi
 
 alias ll="ls -l"
 alias la='ls -A'
+# list only directories
+alias lsd='ls -l | grep "^d"'
 alias cl="clear"
 alias ..="cd .."
 alias ..2="cd ../.."
@@ -29,3 +31,60 @@ alias ..5="cd ../../../../.."
 
 #Growl notification
 growl() { echo -e $'\e]9;'${1}'\007' ; return  ; }
+
+# IP address
+alias ip="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+.\d+)/ && print $1'"
+
+# Listeners
+alias listeners="lsof -iTCP -sTCP:LISTEN"
+
+# size and size-bin
+alias size-bin='size'
+alias size='du -sh'
+
+# One of @janmoesen’s ProTip™s
+for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+    alias "$method"="lwp-request -m '$method'"
+done
+
+# Show network connections
+# Often useful to prefix with SUDO to see more system level network usage
+alias network.connections='lsof -l -i +L -R -V'
+alias network.established='lsof -l -i +L -R -V | grep ESTABLISHED'
+alias network.internalip="ifconfig en0 | egrep -o '([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)'"
+alias network.externalip='curl -s http://checkip.dyndns.org/ | sed "s/[a-zA-Z<>/ :]//g"'
+
+# Files used, anywhere on the filesystem
+alias files.usage='sudo fs_usage -e -f filesystem|grep -v CACHE_HIT|grep -v grep'
+# Files being opened
+alias files.open='sudo fs_usage -e -f filesystem|grep -v CACHE_HIT|grep -v grep|grep open'
+# Files in use in the Users directory
+alias files.usage.user='sudo fs_usage -e -f filesystem|grep -v CACHE_HIT|grep -v grep|grep Users'
+
+# Use Mac OSX Preview to open a man page in a more handsome format
+function manp() {
+  man -t $1 | open -f -a /Applications/Preview.app
+}
+
+# gracias, @mathiasbynens
+function json() {
+    if [ -p /dev/stdin ] ; then
+        python -mjson.tool
+    else
+        python -mjson.tool <<< "$@"
+    fi
+}
+
+## Fun stuff
+# Do a Matrix movie effect of falling characters
+function matrix1() {
+echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|awk '{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'
+}
+
+function matrix2() {
+echo -e "\e[1;40m" ; clear ; characters=$( jot -c 94 33 | tr -d '\n' ) ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) $characters ;sleep 0.05; done|awk '{ letters=$5; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'
+}
+
+function matrix3() {
+echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $( printf "\U$(( $RANDOM % 500 ))" ) ;sleep 0.05; done|awk '{c=$4; letter=$4;a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'
+}
