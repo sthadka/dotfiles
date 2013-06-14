@@ -1,0 +1,12 @@
+[submodule "tmux/tmux"]
+    path = tmux/tmux
+    url = git://github.com/zaiste/tmuxified.git
+    ignore = dirty
+
+[submodule "vim/vim/bundle/vim-bad-whitespace"]
+    path = vim/vim/bundle/vim-bad-whitespace
+    url = https://github.com/bitc/vim-bad-whitespace
+    ignore = dirty
+
+
+

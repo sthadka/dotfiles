@@ -1,0 +1,161 @@
+""
+" Vim config
+"
+" Christian Lundgren <cav.lundgren@gmail.com>
+"
+" Plugins used: superTab, snipMate, erlang-tags.vim, ctrlp, EasyMotion
+"
+""
+
+""
+" General
+""
+set nocompatible " Use vim not vi
+set history=50 " Command history
+set ttyfast " Use fast terminal
+filetype on " File type identification
+filetype plugin on " Enable filetype plugins
+filetype indent on " Enable filetype indent
+set wildmode=longest,list,full
+set wildmenu
+noremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
+command W w
+
+""
+" Session
+""
+set viminfo='10,\"100,:20,%,n~/.viminfo " Store session info
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm'\"")|else|exe "norm $"|endif|endif
+au WinEnter * checktime
+
+""
+" Interface
+""
+set textwidth=78 " Limit line lengths
+set showmatch " Show matching braces
+set ruler " Enable ruler
+set scrolloff=3 " Number of lines visible around the cursor
+"set number " Show line numbers
+set title " Set title of window
+set background=dark " Use dark background/bright foreground
+syntax on " Enable syntax highlighting
+set t_Co=256 " Use 256 color terminal
+"let g:solarized_termcolors=256
+"colorscheme lucius " Set color scheme
+colorscheme solarized " Set color scheme
+set cursorline cursorcolumn
+au WinLeave * set nocursorline nocursorcolumn " Disable cursor column/line in other windows
+au WinEnter * set cursorline cursorcolumn " Enable cursor colum/line in current windows
+au BufNewFile,BufRead *.term set filetype=erlang
+au BufNewFile,BufRead *.coffee set filetype=javascript
+au BufNewFile,BufRead Rakefile set filetype=ruby
+
+""
+" Searching
+""
+set hlsearch " Highlight search
+set incsearch " Use incremental search
+set smartcase " Ignore case when searching with lower case only
+nnoremap <CR> :noh<CR>
+set tags+=~/.vim/erlang_tags
+"autocmd FileType erlang setlocal iskeyword+=:
+"autocmd FileType erlang ErlangUpdateTags **/*.erl
+autocmd FileType erlang nnoremap <c-]> :ErlangTagJump()<CR>
+command! -nargs=+ -complete=file ErlangTagJump call s:ErlangTagJump()
+function! s:ErlangTagJump()
+    :setlocal isk+=:
+    let cword=expand("<cword>")
+    if match(cword, '\w\+:\w\+') == -1
+        let lines = readfile(bufname("%"))
+        let modpat = '-module(\zs[^)]\+\ze)'
+        let i = match(lines, modpat)
+        let module = i >= 0 ? matchstr(lines[i], modpat) : ''
+        let cword=module.':'.cword
+    endif
+    :exec("tag ".cword)
+    :setlocal isk-=:
+endfunction
+
+
+""
+" Plugins
+""
+let g:ctrlp_custom_ignore = 'rel'
+let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files']
+"let g:ctrlp_prompt_mappings = {
+"  \ 'AcceptSelection("e")': [],
+"  \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
+"  \ }
+
+""
+" Indenting
+""
+set autoindent " Enable auto indent
+" set smartindent " Indent new line after {
+set tabstop=4 " Number of columns for a tab
+set shiftwidth=4 " Number of spaces for ident
+set softtabstop=4 " Make spaces behave like tabs
+set expandtab " Use spaces instead of tabs
+autocmd BufRead,BufNewFile *.c,*.cc,*.cpp,*.h,*.hpp,*.java set noexpandtab ts=8 sw=8 sts=8
+autocmd BufRead,BufNewFile *.erl,*.py set expandtab ts=4 sw=4 sts=4
+autocmd BufRead,BufNewFile *.rb,*.js,*.coffee,*.scala set expandtab ts=2 sw=2 sts=2
+
+""
+" Editing
+""
+"set virtualedit=all " Enable virtual edit
+set nostartofline " Don't go to first non-blank
+set backspace=2 " Backspace functionality
+" File type specifics
+autocmd BufNewFile,BufRead */SConstruct set filetype=python
+au FileType cpp,c,java,sh set noexpandtab
+au FileType cpp,c,java,sh set cindent
+" Commenting
+map ,# :s/^/#/ <BAR> :noh <CR>
+map ,/ :s/^/\/\// <BAR> :noh <CR>
+map ," :s/^/\"/ <BAR> :noh <CR>
+map ,% :s/^/%/ <BAR> :noh <CR>
+map ,c :s/^\/\/\\|^[#"%;]// <BAR> :noh <CR>
+" Wrapping comments
+map ,* :s/^\(.*\)$/\/\* \1 \*\// <BAR> :noh <CR>
+map ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/ <BAR> :noh <CR>
+map <F2> :TlistToggle <CR>
+
+call pathogen#infect()
+
+""
+" Switch panes
+" "
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Remove search highlighting
+nnoremap <esc> :noh<return><esc>
+
+" Enable clipboard
+set clipboard=unnamed
+
+" Trim trailing whitespaces on save
+autocmd BufWritePre * :call <SID>StripWhite()
+fun! <SID>StripWhite()
+    %s/[ \t]\+$//ge
+    %s!^\( \+\)\t!\=StrRepeat("\t", 1 + strlen(submatch(1)) / 8)!ge
+endfun
+
+" Enable python powerline
+" source /Library/Python/2.7/site-packages/powerline/ext/vim/source_plugin.vim
+
+" Clean git gutter background highlight
+highlight clear SignColumn
+
+" Create a dummy sign to keep the sign column always on
+autocmd BufEnter * sign define dummy
+autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+
+" Enable spell check for all files
+set spell spelllang=en_us

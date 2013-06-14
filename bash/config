@@ -1,0 +1,10 @@
+#Enable color LS on Mac OSX/BSD
+export CLICOLOR=1
+
+#Change the dark blue color to yellow for directories under Mac OS X
+export LSCOLORS=dxfxcxdxbxegedabagacad
+
+export PS1="\w$ "
+export TERMINFO=/lib/terminfo
+stty -ixon -ixoff
+export EDITOR='vim'

@@ -1,0 +1,19 @@
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+.svn
+*~
+.*.swp
+tags
+
+# Weird problem with command-t as a submodule - so cloned it's own repo
+command-t/
