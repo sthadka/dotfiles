@@ -3,8 +3,8 @@
     url = git://github.com/zaiste/tmuxified.git
     ignore = dirty
 
-[submodule "vim/vim/bundle/vim-bad-whitespace"]
-    path = vim/vim/bundle/vim-bad-whitespace
+[submodule "vim/vim.symlink/bundle/vim-bad-whitespace"]
+    path = vim/vim.symlink/bundle/vim-bad-whitespace
     url = https://github.com/bitc/vim-bad-whitespace
     ignore = dirty
 

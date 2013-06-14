@@ -1,13 +1,4 @@
 ""
-" Vim config
-"
-" Christian Lundgren <cav.lundgren@gmail.com>
-"
-" Plugins used: superTab, snipMate, erlang-tags.vim, ctrlp, EasyMotion
-"
-""
-
-""
 " General
 ""
 set nocompatible " Use vim not vi
