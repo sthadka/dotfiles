@@ -18,10 +18,9 @@ if [ -f ~/.localrc ]; then
 fi
 
 source ~/.dotfiles/bash/aliases
-source ~/.dotfiles/bash/completions
 source ~/.dotfiles/bash/paths
 source ~/.dotfiles/bash/config
-source ~/.dotfiles/bash/funcitons/utils
+source ~/.dotfiles/bash/functions/utils
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 [[ -s "$HOME/.dotfiles/bash/functions/ps1_functions" ]] && source "$HOME/.dotfiles/bash/functions/ps1_functions"

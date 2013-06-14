@@ -1,1 +1,1 @@
-source ~/.dotfiles/rake/completion
+complete -C ~/.dotfiles/rake/completion -o default rake
