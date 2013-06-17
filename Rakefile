@@ -1,7 +1,7 @@
 require 'rake'
 
 task :setup_modules do
-  modules_path = File.join(ENV['HOME'], ".modules")
+  modules_path = File.join(Helpers::target, ".modules")
   if ! File.exists?(modules_path)
     `cp core/modules_template #{modules_path}`
     puts "Minimal modules template has been copied to #{modules_path}."
@@ -64,7 +64,7 @@ end
 desc "Hook our dotfiles into system-standard positions."
 task :install => :setup_modules do
 
-  modules = File.read("#{ENV['HOME']}/.modules").split("\n")
+  modules = File.read("#{Helpers.target}/.modules").split("\n")
   linkables = []
   modules.each do |m|
     linkables += Dir.glob(File.join(m, "*.symlink"))
@@ -79,7 +79,7 @@ task :install => :setup_modules do
     backup = false
 
     file = linkable.split('/').last.split('.symlink').last
-    target = "#{ENV["HOME"]}/.#{file}"
+    target = "#{Helpers::target}/.#{file}"
 
     if File.exists?(target) || File.symlink?(target)
       unless skip_all || overwrite_all || backup_all
@@ -94,7 +94,7 @@ task :install => :setup_modules do
         end
       end
       FileUtils.rm_rf(target) if overwrite || overwrite_all
-      `mv "$HOME/.#{file}" "$HOME/.#{file}.backup"` if backup || backup_all
+      `mv "#{Helpers::target}/.#{file}" "#{Helpers::target}/.#{file}.backup"` if backup || backup_all
     end
     `ln -s "$PWD/#{linkable}" "#{target}"`
   end
@@ -102,7 +102,7 @@ end
 
 task :uninstall do
 
-  modules = File.read("#{ENV['HOME']}/.modules").split("\n")
+  modules = File.read("#{Helpers::target}/.modules").split("\n")
   linkables = []
   modules.each do |m|
     linkables += Dir.glob(File.join(m, "*.symlink"))
@@ -111,19 +111,26 @@ task :uninstall do
   linkables.each do |linkable|
 
     file = linkable.split('/').last.split('.symlink').last
-    target = "#{ENV["HOME"]}/.#{file}"
+    target = "#{Helpers::target}/.#{file}"
 
     # Remove all symlinks created during installation
     if File.symlink?(target)
       FileUtils.rm(target)
     end
-    
+
     # Replace any backups made during installation
-    if File.exists?("#{ENV["HOME"]}/.#{file}.backup")
-      `mv "$HOME/.#{file}.backup" "$HOME/.#{file}"` 
+    if File.exists?("#{Helpers::target}/.#{file}.backup")
+      `mv "#{Helpers::target}/.#{file}.backup" "#{Helpers::target}/.#{file}"`
     end
 
   end
 end
+
+class Helpers
+    def self.target
+        "#{ENV['TARGET']}" != "" ? "#{ENV['TARGET']}" : "#{ENV['HOME']}"
+    end
+end
+
 
 task :default => 'install'
