@@ -150,3 +150,6 @@ autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('
 
 " Enable spell check for all files
 set spell spelllang=en_us
+
+" Highlight all columns beyond col 80
+let &colorcolumn=join(range(81,999),",")
