@@ -29,3 +29,6 @@ ps1_set --prompt ∴
 # vi mode
 set -o vi
 
+# ^l clear screen when using vi mode
+bind -m vi-insert "\C-l":clear-screen
+
