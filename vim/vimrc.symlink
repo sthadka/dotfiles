@@ -153,3 +153,6 @@ set spell spelllang=en_us
 
 " Highlight all columns beyond col 80
 let &colorcolumn=join(range(81,999),",")
+
+" Remove current line highlight in insert mode
+autocmd InsertEnter,InsertLeave * set cul!
