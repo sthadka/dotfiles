@@ -2,7 +2,7 @@
 unbind C-b
 
 # set prefix key to ctrl-a
-set -g prefix C-a
+set -g prefix `
 
 # lower command delay
 set -sg escape-time 1
@@ -18,7 +18,7 @@ bind r source-file ~/.tmux.conf \; display "Reloaded tmux config file."
 #bind C-a send-prefix
 
 # toggle last window like screen
-bind-key C-a last-window
+bind-key ` last-window
 
 # navigate through windows like screen
 bind-key C-a-n next
@@ -107,6 +107,9 @@ unbind p
 bind p paste-buffer
 bind -t vi-copy 'v' begin-selection
 bind -t vi-copy 'y' copy-selection
+
+# close pane
+bind X kill-pane #P
 
 # xclip support (commented as this often doesn't make sense on remote servers)
 #bind C-c run "tmux save-buffer - / xclip -i -sel clipboard"
