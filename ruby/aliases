@@ -1,9 +1,0 @@
-alias r="ruby"
-alias i="irb"
-alias rk="rake"
-alias rkt="rake -T | vim -"
-alias b="bundle"
-alias be="bundle exec"
-alias bi="bundle install"
-
-

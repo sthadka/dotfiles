@@ -1,5 +1,5 @@
 tmuxified
-========= 
+=========
 
 A tiny « framework » for Tmux, with handy scripts and status line themes.
 

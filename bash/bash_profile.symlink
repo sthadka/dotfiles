@@ -7,7 +7,3 @@ fi
 if [ -f ~/.localrc ]; then
   . ~/.localrc
 fi
-
-# User specific environment and startup programs
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
