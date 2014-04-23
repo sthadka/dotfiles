@@ -68,5 +68,5 @@ for module in `cat ~/.modules`; do
     if [[ -e $module_init_path ]]; then
     . $module_init_path
     fi
-    PATH=$PATH:$HOME/dotfiles/$module/bin
+    PATH=$PATH:$HOME/.dotfiles/$module/bin
 done
