@@ -50,11 +50,8 @@ set -g mouse-select-pane off
 set -g mouse-resize-pane off
 set -g mouse-select-window off
 
-# quick view of processes
-bind '~' split-window "exec htop"
-
 # scrollback buffer n lines
-set -g history-limit 5000
+set -g history-limit 50000
 
 # on-screen time for display-panes in ms
 set -g display-panes-time 2000
