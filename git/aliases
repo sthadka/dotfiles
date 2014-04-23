@@ -1,5 +1,6 @@
 alias g="git status"
 alias ga="git add"
+alias gap="git add -p"
 alias gaa="git add --all"
 alias gc="git commit -m"
 alias gca="git commit -am"
