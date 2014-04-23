@@ -17,7 +17,6 @@ else
   alias l='ls -lAh'
 fi
 
-
 alias ll="ls -l"
 alias la='ls -A'
 # list only directories
@@ -28,9 +27,6 @@ alias ..2="cd ../.."
 alias ..3="cd ../../.."
 alias ..4="cd ../../../.."
 alias ..5="cd ../../../../.."
-
-#Growl notification
-growl() { echo -e $'\e]9;'${1}'\007' ; return  ; }
 
 # IP address
 alias ip="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+.\d+)/ && print $1'"
