@@ -2,8 +2,7 @@ bash
 bin
 core
 git
-rake
-ruby
+osx
 tmux
 vim
-
+worksys
