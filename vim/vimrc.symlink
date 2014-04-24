@@ -2,7 +2,8 @@
 " General
 ""
 set nocompatible " Use vim not vi
-set history=50 " Command history
+set history=1000 " Command history
+set undolevels=1000 " Use many muchos levels of undo
 set ttyfast " Use fast terminal
 filetype on " File type identification
 filetype plugin on " Enable filetype plugins
@@ -14,6 +15,8 @@ noremap <Down> <nop>
 noremap <Left> <nop>
 noremap <Right> <nop>
 command W w
+set nobackup
+set noswapfile
 
 ""
 " Session
