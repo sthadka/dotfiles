@@ -488,11 +488,11 @@ snippet otp application
 
 	start(_StartType, _StartArgs) ->
 		case 'TopSupervisor':start_link() of
-		{ok, Pid} ->
-			{ok, Pid};
-		Error ->
-			Error
-			end.
+			{ok, Pid} ->
+				{ok, Pid};
+			Error ->
+				Error
+	    end.
 
 	stop(_State) ->
 		ok.
