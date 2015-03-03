@@ -158,3 +158,6 @@ autocmd InsertEnter,InsertLeave * set cul!
 
 " Use vim-erlang-tags
 set runtimepath^=~/.vim/bundle/vim-erlang-tags
+
+" vim erlang runtime
+:set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
