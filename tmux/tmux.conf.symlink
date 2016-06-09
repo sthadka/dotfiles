@@ -2,7 +2,7 @@
 unbind C-b
 
 # set prefix key to ctrl-a
-set -g prefix `
+set -g prefix C-a
 
 # lower command delay
 set -sg escape-time 1
@@ -15,10 +15,10 @@ set -g pane-base-index 1
 bind r source-file ~/.tmux.conf \; display "Reloaded tmux config file."
 
 # pass through a ctrl-a if you press it twice
-#bind C-a send-prefix
+bind C-b send-prefix
 
 # toggle last window like screen
-bind-key ` last-window
+bind-key C-a last-window
 
 # navigate through windows like screen
 bind-key C-a-n next
@@ -95,7 +95,6 @@ set -g message-bg colour22
 set -g message-attr bright
 
 # configure contents of status bar
-set -g status-utf8 on
 set -g status-left-length 40
 set -g status-left "#[fg=green]\"#S\""
 
