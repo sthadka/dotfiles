@@ -84,6 +84,21 @@ let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files']
 "  \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
 "  \ }
 
+" syntastic
+
+" This does what it says on the tin. It will check your file on open too, not just on save.
+" You might not want this, so just leave it out if you don't.
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" typescript-vim
+let g:syntastic_typescript_tsc_fname = ''
+
 ""
 " Indenting
 ""
@@ -95,7 +110,7 @@ set softtabstop=4 " Make spaces behave like tabs
 set expandtab " Use spaces instead of tabs
 autocmd BufRead,BufNewFile *.c,*.cc,*.cpp,*.h,*.hpp,*.java set noexpandtab ts=8 sw=8 sts=8
 autocmd BufRead,BufNewFile *.erl,*.py set expandtab ts=4 sw=4 sts=4
-autocmd BufRead,BufNewFile *.rb,*.js,*.coffee,*.scala set expandtab ts=4 sw=4 sts=4
+autocmd BufRead,BufNewFile *.ts,*.rb,*.js,*.coffee,*.scala set expandtab ts=2 sw=2 sts=2
 
 ""
 " Editing
@@ -119,6 +134,7 @@ map ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/ <BAR> :noh <CR>
 map <F2> :TlistToggle <CR>
 
 call pathogen#infect()
+call pathogen#helptags()
 
 ""
 " Switch panes
@@ -160,4 +176,15 @@ autocmd InsertEnter,InsertLeave * set cul!
 set runtimepath^=~/.vim/bundle/vim-erlang-tags
 
 " vim erlang runtime
-:set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
+set runtimepath^=~/.vim/bundle/vim-erlang-runtime/
+
+" golang custom
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+autocmd BufWritePre *.go :GoBuild
+
+" vimwiki settings
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
